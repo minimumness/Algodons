@@ -1,13 +1,12 @@
+import bs4  # BeautifulSoup
 import requests
-from bs4 import BeautifulSoup
 
-page_link = 'http://www.reuters.com/article/entertainmentNews/idUSN2820662920070102'
-page_response = requests.get(page_link, timeout=5)
-page_content = BeautifulSoup(page_response.content, "html.parser")
+results = []
 
-textContent = []
-for i in range(0, 20):
-    paragraphs = page_content.find_all("p")[i].text
-    textContent.append(paragraphs)
-    
-mydivs = BeautifulSoup.findAll("div", {"class": "StandardArticleBody_body"})
+page = requests.get('http://www.reuters.com/article/entertainmentNews/idUSN2820662920070102')
+soup = bs4.BeautifulSoup(page.text)
+
+element = soup.select('div.StandardArticleBody_body')
+movie = element[0].get_text()
+
+results.append(movie)
