@@ -1,7 +1,6 @@
 import bs4  # BeautifulSoup
 import requests
 
-
 def get_article_body(URL):
     
     page = requests.get(URL)
